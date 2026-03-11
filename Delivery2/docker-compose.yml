@@ -1,0 +1,22 @@
+version: "3.8"
+
+# ============================================================
+# docker-compose.yml — node-express-chatbox
+# Uso: docker compose up
+# La app estará disponible en: http://localhost:3001
+# ============================================================
+
+services:
+  chatbox:
+    build: .
+    container_name: chatbox-app
+    ports:
+      - "${PORT:-3001}:${PORT:-3001}"
+    environment:
+      - PORT=${PORT:-3001}
+    env_file:
+      - .env
+    volumes:
+      - .:/app
+      - /app/node_modules
+    restart: unless-stopped
